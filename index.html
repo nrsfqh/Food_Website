@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="recipes.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <style>
 
@@ -54,16 +57,25 @@ body, html {
    
 }
 
-.result {
-        display: flex;
-        flex-direction: column;
-        margin-top: 10px; /* Adjust as needed */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px; 
+       
 }
 
-.result p {
-        font-size: x-large;
+.card {
+  width: 18em;
+  margin: 10px; /* Adjust as needed */
 }
 
+.btn-custom {
+    background-color: #cc7e18; /* Set your desired background color */
+    color: #ffffff; /* Set your desired text color */
+    /* Add any other desired styles */
+}
 
 
 </style>
@@ -80,7 +92,7 @@ body, html {
         </div>  
     </div>
 
-
+    <br>
 
     <div class = "sidebar">
 
@@ -89,17 +101,45 @@ body, html {
             <h2> Filter: </h2>
         
             <div class="ingredient_list">
+                <br>
+                <h5> Ingredients:</h5>
 
                 <div class="checkbox">
-                    <label><input type="checkbox" rel="rice" onchange="change();"/> Rice</label>
+                    <label><input type="checkbox" rel="Rice" onchange="change();"/> Rice</label>
                 </div>
                 
                 <div class="checkbox">
-                    <label><input type="checkbox" rel="tomatoes" onchange="change();"/> Tomatoes</label>
+                    <label><input type="checkbox" rel="Coconut Milk" onchange="change();"/> Coconut Milk</label>
+                </div>
+
+                <div class="checkbox">
+                    <label><input type="checkbox" rel="Chicken" onchange="change();"/> Chicken</label>
                 </div>
         
             </div>
-            <br>
+
+            <br><br>
+
+            <div class="cuisine_filter">
+                
+                <h5> Cuisines:</h5>
+
+                <div class="btn-group">
+                        <button type="button" class="btn btn-custom btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                    Different Cuisines
+                    </button>
+                    <div class="dropdown-menu"  id="cuisineDropdown">
+                        <a class="dropdown-item" onclick="change('Malaysian');">Malaysian</a>
+                        <a class="dropdown-item" onclick="change('Western');">Western</a>
+                        <a class="dropdown-item" onclick="change('Indian');">Indian</a>
+                    </div>
+                   
+                </div>
+
+            </div>
+
+
+            <br><br>
             <button class="button" onclick="showAllRecipe()">Show All Recipes!</button>
 
 
@@ -113,11 +153,16 @@ body, html {
         <div class="text_container">
                 
             <h2>Results</h2>
+
+        </div>
             
-            <div class="result" id="recipeResult">
+            <div class="card-container" id="recipeResult">
             <!-- Recipe titles will be dynamically generated here -->   
 
+            
+
             </div>
+
         </div>       
     </div>
     
@@ -127,15 +172,21 @@ body, html {
 
 
     // Function to filter recipes based on ingredient filters
-    function filterRecipes(ingredients) {
-      if (ingredients.length === 0) {
+    function filterRecipes(ingredients, cuisine) {
+      if (ingredients.length === 0 && !cuisine) {
         return ; // Show no recipes unless ingredients are selected (first view)
       }
       
       // Filter the recipes based on selected ingredients
       return recipes.filter(recipe => {
         // Check if the recipe's ingredients include all selected ingredients
-        return ingredients.every(ingredient => recipe.ingredients.includes(ingredient));
+        const ingredientsMatch = ingredients.every(ingredient => recipe.ingredients.includes(ingredient));
+
+        // Check if the recipe's cuisine matches the selected cuisine
+        const cuisineMatch = !cuisine || recipe.cuisine === cuisine;
+
+        // Return true if both ingredients and cuisine match
+        return ingredientsMatch && cuisineMatch;
       });
     }
     
@@ -143,6 +194,8 @@ body, html {
     function change(){
         // Declare variables
         var input = document.querySelectorAll('.ingredient_list input[type=checkbox]'); 
+        const cuisineInput = document.getElementById('cuisineDropdown');
+      
         const recipeResult = document.getElementById('recipeResult');
         recipeResult.innerHTML = '';
     
@@ -150,16 +203,39 @@ body, html {
         var selectedIngredients = Array.from(input)
         .filter(checkbox => checkbox.checked)
         .map(checkbox => checkbox.getAttribute('rel'));
-    
-        var filteredRecipes = filterRecipes(selectedIngredients);
+
+
+
+        var selectedCuisine = event.target.textContent.trim();
+        console.log(selectedCuisine);
+
+        var filteredRecipes = filterRecipes(selectedIngredients, selectedCuisine);
     
         //Filltered recipes are then iterated over to append to recipeResult container 
         
         if (filteredRecipes){
             filteredRecipes.forEach(recipe => {
-                const recipeTitle = document.createElement('p');
-                recipeTitle.textContent = recipe.title;
-                recipeResult.appendChild(recipeTitle);
+                // For each recipe, create a div card
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.width = '18rem';
+
+                const cardBody = document.createElement('div');
+                cardBody.className = 'card-body';
+
+                const cardTitle = document.createElement('h5');
+                cardTitle.className = 'card-title';
+                cardTitle.textContent = recipe.title;
+
+                const cardText = document.createElement('p');
+                cardText.className = 'card-text';
+                cardText.textContent = recipe.description;
+
+                cardBody.appendChild(cardTitle);
+                cardBody.appendChild(cardText);
+                card.appendChild(cardBody);
+                recipeResult.appendChild(card);
+
             });
         }
     
@@ -174,9 +250,25 @@ body, html {
         recipeResult.innerHTML = '';
     
         recipes.forEach(recipe => {
-        const recipeTitle = document.createElement('p');
-        recipeTitle.textContent = recipe.title;
-        recipeResult.appendChild(recipeTitle);
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.style.width = '18rem';
+
+            const cardBody = document.createElement('div');
+            cardBody.className = 'card-body';
+
+            const cardTitle = document.createElement('h5');
+            cardTitle.className = 'card-title';
+            cardTitle.textContent = recipe.title;
+
+            const cardText = document.createElement('p');
+            cardText.className = 'card-text';
+            cardText.textContent = recipe.description;
+
+            cardBody.appendChild(cardTitle);
+            cardBody.appendChild(cardText);
+            card.appendChild(cardBody);
+            recipeResult.appendChild(card);
 
         });
     

@@ -1,7 +1,23 @@
 const recipes = [
-    { id: 1, title: 'Nasi Lemak', ingredients: ['rice', 'coconut milk', 'anchovies', 'peanuts', 'cucumber', 'sambal'], cuisine: 'Malaysian' },
-    { id: 2, title: 'Fish & Chips', ingredients: ['Fish fillets', 'Potatoes ','All-purpose flour','Baking powder'], cuisine: 'Western' },
-    { id: 3, title: 'Spaghetti Bolognese', ingredients: ['spaghetti', 'ground beef', 'onion', 'garlic', 'tomato sauce', 'tomato paste', 'dried oregano', 'dried basil', 'salt', 'black pepper', 'olive oil'], 
-    cuisine: 'Western'},
-    { id: 4, title: 'Nasi Ayam', ingredients: ['chicken', 'rice', 'soy sauce', 'ginger', 'garlic', 'cucumber', 'chili sauce'], cuisine: 'Malaysian'}
+    { id: 1, title: 'Nasi Lemak', ingredients: ['Rice', 'Coconut Milk', 'Anchovies', 'Peanuts', 'Cucumber', 'Sambal'], 
+    cuisine: 'Malaysian', description: 'Nasi lemak is a dish originating in Malay cuisine that consists of fragrant rice cooked in coconut milk and pandan leaf.'},
+    { id: 2, title: 'Fish & Chips', ingredients: ['Fish fillets', 'Potatoes ','All-purpose flour','Baking powder'], 
+    cuisine: 'Western', description: 'Fish and chips is a hot dish consisting of fried fish in batter, served with chips.' },
+    { id: 3, title: 'Spaghetti Bolognese', ingredients: ['Spaghetti', 'Ground Beef', 'Onion', 'Garlic', 'Tomato Sauce', 'Tomato Paste', 'Dried Oregano', 'Dried Basil', 'Salt', 'Black Pepper', 'Olive Oil'], 
+    cuisine: 'Western', description: 'A true Italian classic with a meaty, chilli sauce'},
+    { id: 4, title: 'Nasi Ayam', ingredients: ['Chicken', 'Rice', 'Soy sauce', 'Ginger', 'Garlic', 'Cucumber', 'Chili Sauce'], 
+    cuisine: 'Malaysian', description: 'Also known as "Chicken Rice", it is a dish of poached chicken and seasoned rice, served with chilli sauce and usually with cucumber garnishes.'},
+    { id: 5, title: 'Biryani', ingredients:  ['Mutton', 'Chicken', 'Beef', 'Eggs', 'Nuts', 'Dried fruits', 'Vegetables', 'Potatoes'] , 
+    cuisine: 'Indian', description: 'Biryani is a mixed rice dish originating among the Muslims of South Asia.'},
+    { id: 6, title: 'Roti Prata', ingredients: ['Flour', 'Water', 'Salt', 'Ghee', 'Curry'], 
+    cuisine: 'Indian', description: 'Roti Prata, also known as Roti Canai, is a flatbread dish found in several countries in Southeast Asia.'},
+    { id: 7, title: 'Laksa', ingredients: ['Noodles', 'Herbs', 'Coconut Milk', 'Tamarind', 'Spice paste'], 
+    cuisine: 'Malaysian', description: 'Laksa is a spicy noodle dish popular in Southeast Asia.'},
+    { id: 8, title: 'Steak', ingredients: ['Steak', 'Salt', 'Black pepper', 'Butter', 'Garlic', 'Fresh herbs'], 
+    cuisine: 'Western', description: 'A juicy and flavorful steak cooked to perfection and served with a delicious herb butter sauce.'},
+    { id: 9, title: 'Chapati', ingredients: ['Whole wheat flour', 'Water', 'Salt', 'Oil or ghee'], 
+    cuisine: 'Indian', description: 'Chapati is a staple in Indian cuisine and is often served with curries or used to make wraps.'},
+    // { id: 10, title: '', ingredients: , 
+    // cuisine: '', description: ''},
 ];
+    
