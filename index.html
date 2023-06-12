@@ -8,88 +8,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<style>
-
-body, html {
-  height: 100%;
-  margin: 0;
-  background-color: #e9e9e9;
-  padding: 0;
-  box-sizing: border-box;
-}
-.banner {
-    /* The image used */
-    background-image: 
-    url(https://cdn.pixabay.com/photo/2017/02/15/10/39/salad-2068220_1280.jpg);
-    
-    height: 50%;
-
-    /* Position and center the image to scale nicely on all screens */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    }
-
-/* Place text in the middle of the image */
-.banner-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-}
-
-.sidebar {
-    margin-left: 70px;
-    width: 200px;
-    float: left;
-}
-
-.body_container {
-    margin-left: 220px;
-}
-
-.text_container{
-    text-align: center;
-   
-}
-
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px; 
-       
-}
-
-.card {
-  width: 18em;
-  margin: 10px; /* Adjust as needed */
-}
-
-.btn-custom {
-    background-color: #cc7e18; /* Set your desired background color */
-    color: #ffffff; /* Set your desired text color */
-    /* Add any other desired styles */
-}
-
-
-
-
-</style>
-
 <body>
 
     <!-- banner -->
 
     <div class="banner">
         <div class = "banner-text">
-          <h1>Welcome to the site!</h1>
-          <h5>Don't know what to eat today? You come to the right place!</h5>
+          <h1 class="banner-h1">Welcome to the site!</h1>
+          <h5 class = "banner-h5" >Don't know what to eat today? You come to the right place!</h5>
 
         </div>  
     </div>
@@ -104,7 +35,7 @@ body, html {
         
             <div class="ingredient_list">
                 <br>
-                <h5> Ingredients:</h5>
+                <h5 class = "h5-style"> Ingredients:</h5>
 
                 <div class="checkbox">
                     <label><input type="checkbox" value="Rice" onchange="change();"/> Rice</label>
@@ -120,11 +51,11 @@ body, html {
         
             </div>
 
-            <br><br>
+            <hr class="line">
 
             <div class="cuisine_filter">
                 
-                <h5> Cuisines:</h5>
+                <h5 class = "h5-style"> Cuisines:</h5>
 
                 <div class="cuisine-list">
 
@@ -147,8 +78,10 @@ body, html {
             </div>
 
 
-            <br><br>
-            <button class="button" onclick="showAllRecipe()">Show All Recipes!</button>
+            <hr class="line">
+            <br>
+
+            <button class="btn btn-showall" onclick="showAllRecipe()">Show All Recipes!</button>
 
 
         </div>
@@ -206,15 +139,18 @@ body, html {
 
     // Function to filter recipes based on ingredient filters
     function filterRecipes(ingredients, cuisine) {
-        //ingredient and cuisine array is empty
-        if (ingredients.length === 0 && cuisine.length === 0) {
+        //check if ingredient and cuisine array is 0
+        //or if either is null
+        if (ingredients.length === 0  && (!cuisine || cuisine.length === 0)) {
             return []; // Show no recipes unless ingredients are selected (first view)
       }
 
         // Update the selected cuisine if a new cuisine is selected
-        if (cuisine.length > 0) {
+        if (cuisine && cuisine.length > 0) {
             selectedCuisine = cuisine;
-        }
+        } else {
+            selectedCuisine = [];
+    }
       
       // Filter the recipes based on selected ingredients
         return recipes.filter(recipe => {
@@ -255,8 +191,12 @@ body, html {
         var selectedCuisine = Array.from(cuisineInput)
         .filter(checkbox2 => checkbox2.checked)
         .map(checkbox2 => checkbox2.value)
-        .toString();
+        // .toString();
         console.log("Selected Cuisine:", selectedCuisine);
+
+        // If selectedCuisine is an empty string, (and it's true) set it to null
+        const cuisine = selectedCuisine.length > 0 ? selectedCuisine : null;
+        console.log("Selected Cuisine:", cuisine);    
 
         var filteredRecipes = filterRecipes(selectedIngredients, selectedCuisine);
         console.log("Filtered Recipes:", filteredRecipes);
@@ -288,7 +228,7 @@ body, html {
 
                  //Creates Button 
                 const cardMore = document.createElement('button');
-                cardMore.className = 'btn btn-outline-dark';
+                cardMore.className = 'btn btn-custom';
                 cardMore.textContent = "Show More";
 
                 //'Listens' if the button is clicked, if so, run openModal()
@@ -353,7 +293,7 @@ body, html {
 
             //Creates Button 
             const cardMore = document.createElement('button');
-            cardMore.className = 'btn btn-outline-dark';
+            cardMore.className = 'btn btn-custom';
             cardMore.textContent = "Show More";
 
             //'Listens' if the button is clicked, if so, run openModal()
