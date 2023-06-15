@@ -5,81 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="recipes.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<style>
-
-body, html {
-  height: 100%;
-  margin: 0;
-  background-color: #fdfbf4;
-  padding: 0;
-  box-sizing: border-box;
-}
-.banner {
-    /* The image used */
-    background-image: 
-    url(https://cdn.pixabay.com/photo/2017/02/15/10/39/salad-2068220_1280.jpg);
-    
-    height: 50%;
-
-    /* Position and center the image to scale nicely on all screens */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    }
-
-/* Place text in the middle of the image */
-.banner-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-}
-
-.sidebar {
-    margin-left: 70px;
-    width: 200px;
-    float: left;
-}
-
-.body_container {
-    margin-left: 220px;
-}
-
-.text_container{
-    text-align: center;
-   
-}
-
-.result {
-        display: flex;
-        flex-direction: column;
-        margin-top: 10px; /* Adjust as needed */
-}
-
-.result p {
-        font-size: x-large;
-}
-
-
-
-</style>
-
-<body>
-
-    <!-- banner -->
+<body> 
 
     <div class="banner">
-        <div class = "banner-text">
-          <h1>Welcome to the site!</h1>
-          <h5>Don't know what to eat today? You come to the right place!</h5>
+        <div class="background-image"></div> 
+        <div class = "banner-text"> 
+        <h1 class="banner-h1">Welcome to the site!</h1>
+        <h5 class = "banner-h5" >Don't know what to eat today? You come to the right place!</h5>
 
-        </div>  
-    </div>
+    </div>  
 
+ <div id="page-body" class="container-xxl shadow-lg">
 
 
     <div class = "sidebar">
@@ -89,18 +33,54 @@ body, html {
             <h2> Filter: </h2>
         
             <div class="ingredient_list">
+                <br>
+                <h5 class = "h5-style"> Ingredients:</h5>
 
                 <div class="checkbox">
-                    <label><input type="checkbox" rel="rice" onchange="change();"/> Rice</label>
+                    <label><input type="checkbox" value="Rice" onchange="change();"/> Rice</label>
                 </div>
                 
                 <div class="checkbox">
-                    <label><input type="checkbox" rel="tomatoes" onchange="change();"/> Tomatoes</label>
+                    <label><input type="checkbox" value="Coconut Milk" onchange="change();"/> Coconut Milk</label>
+                </div>
+
+                <div class="checkbox">
+                    <label><input type="checkbox" value="Chicken" onchange="change();"/> Chicken</label>
                 </div>
         
             </div>
+
+            <hr class="line">
+
+            <div class="cuisine_filter">
+                
+                <h5 class = "h5-style"> Cuisines:</h5>
+
+                <div class="cuisine-list">
+
+                    <div class="checkbox2">
+                        <label><input type="checkbox" value="Malaysian" onchange="change();"/> Malaysian</label>
+                    </div>
+
+                    
+                    <div class="checkbox2">
+                        <label><input type="checkbox" value="Western" onchange="change();"/> Western</label>
+                    </div>
+                  
+                    <div class="checkbox2">
+                        <label><input type="checkbox" value="Indian" onchange="change();"/> Indian</label>
+                    </div>
+        
+                   
+                </div>
+
+            </div>
+
+
+            <hr class="line">
             <br>
-            <button class="button" onclick="showAllRecipe()">Show All Recipes!</button>
+
+            <button class="btn btn-showall" onclick="showAllRecipe()">Show All Recipes!</button>
 
 
         </div>
@@ -113,75 +93,299 @@ body, html {
         <div class="text_container">
                 
             <h2>Results</h2>
+
+        </div>
             
-            <div class="result" id="recipeResult">
+            <div class="card-container" id="recipeResult">
             <!-- Recipe titles will be dynamically generated here -->   
 
+            
+
             </div>
+
         </div>       
     </div>
+
+     <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          
+    </div>
+   </div> 
+       
+   
+</div>
     
 </body>
 
 <script>
 
+    let selectedCuisine = null;
+
+    // let checkbox2 = 
+
+    // checkbox2.addEventListener('click', () => {
+    //     selectedCuisine = null;
+    // });
 
     // Function to filter recipes based on ingredient filters
-    function filterRecipes(ingredients) {
-      if (ingredients.length === 0) {
-        return ; // Show no recipes unless ingredients are selected (first view)
+    function filterRecipes(ingredients, cuisine) {
+        //check if ingredient and cuisine array is 0
+        //or if either is null
+        if (ingredients.length === 0  && (!cuisine || cuisine.length === 0)) {
+            return []; // Show no recipes unless ingredients are selected (first view)
       }
+
+        // Update the selected cuisine if a new cuisine is selected
+        if (cuisine && cuisine.length > 0) {
+            selectedCuisine = cuisine;
+        } else {
+            selectedCuisine = [];
+    }
       
       // Filter the recipes based on selected ingredients
-      return recipes.filter(recipe => {
+        return recipes.filter(recipe => {
         // Check if the recipe's ingredients include all selected ingredients
-        return ingredients.every(ingredient => recipe.ingredients.includes(ingredient));
-      });
+        const ingredientsMatch = ingredients.length === 0 || ingredients.every(ingredient => recipe.ingredients.includes(ingredient));
+        console.log("Recipe Ingredients:", recipe.ingredients);
+        console.log("Selected Ingredients:", ingredients);
+        console.log("Ingredients Match:", ingredientsMatch);
+
+        // Check if the recipe's cuisine matches the selected cuisine
+        //cusineMatch = no cuisine selected OR if selectedCuisine array is empty OR if selected cuisine includes the recipe.cuisine (matches)
+        const cuisineMatch = !selectedCuisine || selectedCuisine.length === 0 || selectedCuisine.includes(recipe.cuisine);
+        console.log("Selected Cuisine:", selectedCuisine);
+        console.log("Recipe Cuisine:", recipe.cuisine);
+        console.log("Cuisine Match:", cuisineMatch);
+
+        // Return true if both ingredients and cuisine match
+        return ingredientsMatch && cuisineMatch;
+        });
     }
     
     
     function change(){
         // Declare variables
-        var input = document.querySelectorAll('.ingredient_list input[type=checkbox]'); 
+        const input = document.querySelectorAll('.ingredient_list input[type=checkbox]'); 
+        const cuisineInput = document.querySelectorAll('.cuisine-list input[type=checkbox]');
+        console.log(cuisineInput)
+      
         const recipeResult = document.getElementById('recipeResult');
         recipeResult.innerHTML = '';
     
         //Selected ingredients are now stored in the selectedIngredients array
         var selectedIngredients = Array.from(input)
         .filter(checkbox => checkbox.checked)
-        .map(checkbox => checkbox.getAttribute('rel'));
-    
-        var filteredRecipes = filterRecipes(selectedIngredients);
+        .map(checkbox => checkbox.value);
+        console.log("Selected Ingredients:", selectedIngredients);
+
+        var selectedCuisine = Array.from(cuisineInput)
+        .filter(checkbox2 => checkbox2.checked)
+        .map(checkbox2 => checkbox2.value)
+        // .toString();
+        console.log("Selected Cuisine:", selectedCuisine);
+
+        // If selectedCuisine is an empty string, (and it's true) set it to null
+        const cuisine = selectedCuisine.length > 0 ? selectedCuisine : null;
+        console.log("Selected Cuisine:", cuisine);    
+
+        var filteredRecipes = filterRecipes(selectedIngredients, selectedCuisine);
+        console.log("Filtered Recipes:", filteredRecipes);
     
         //Filltered recipes are then iterated over to append to recipeResult container 
         
         if (filteredRecipes){
             filteredRecipes.forEach(recipe => {
-                const recipeTitle = document.createElement('p');
-                recipeTitle.textContent = recipe.title;
-                recipeResult.appendChild(recipeTitle);
+                // For each recipe, create a div card
+                const card = document.createElement('div');
+                card.className = 'card';
+                //card.style.width = '18rem';
+                //card.style.height = "15rem";
+
+                const cardImage = document.createElement('img');
+                cardImage.src = recipe.image;
+                cardImage.className = "card-img-top";
+
+                const cardBody = document.createElement('div');
+                cardBody.className = 'card-body';
+
+                const cardTitle = document.createElement('h5');
+                cardTitle.className = 'card-title';
+                cardTitle.textContent = recipe.title;
+
+                const cardText = document.createElement('p');
+                cardText.className = 'card-text';
+                cardText.textContent = recipe.description;
+
+                 //Creates Button 
+                const cardMore = document.createElement('button');
+                cardMore.className = 'btn btn-custom';
+                cardMore.textContent = "Show More";
+
+                //'Listens' if the button is clicked, if so, run openModal()
+                cardMore.addEventListener('click', () => {
+                    openModal(recipe);
+                });
+
+                card.appendChild(cardImage);
+                cardBody.appendChild(cardTitle);
+                cardBody.appendChild(cardText);
+                cardBody.appendChild(cardMore);
+                card.appendChild(cardBody);
+                recipeResult.appendChild(card);
+
             });
         }
-    
-    
+
         
     }
     
     function showAllRecipe(ingredients){
+
+        //Reset Cuisine 
+        selectedCuisine = null;
+
+        //Clear any checkbox ticks
+        const checkboxes = document.querySelectorAll(".ingredient_list input[type=checkbox]");
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });;
+
+        const checkboxes2 = document.querySelectorAll(".cuisine-list input[type=checkbox]");
+        checkboxes2.forEach(checkbox2 => {
+            checkbox2.checked = false;
+        });;
         
         //Declare Variables
         const recipeResult = document.getElementById('recipeResult');
         recipeResult.innerHTML = '';
     
         recipes.forEach(recipe => {
-        const recipeTitle = document.createElement('p');
-        recipeTitle.textContent = recipe.title;
-        recipeResult.appendChild(recipeTitle);
+            const card = document.createElement('div');
+            card.className = 'card';
+            //card.style.width = '18rem';
+            //card.style.height = "20rem";
+
+            const cardImage = document.createElement('img');
+            cardImage.src = recipe.image;
+            cardImage.className = "card-img-top";
+
+            const cardBody = document.createElement('div');
+            cardBody.className = 'card-body';
+
+            const cardTitle = document.createElement('h5');
+            cardTitle.className = 'card-title';
+            cardTitle.textContent = recipe.title;
+
+            const cardText = document.createElement('p');
+            cardText.className = 'card-text';
+            cardText.textContent = recipe.description;
+
+            //Creates Button 
+            const cardMore = document.createElement('button');
+            cardMore.className = 'btn btn-custom';
+            cardMore.textContent = "Show More";
+
+            //'Listens' if the button is clicked, if so, run openModal()
+            cardMore.addEventListener('click', () => {
+                openModal(recipe);
+            });
+ 
+            card.appendChild(cardImage);
+            cardBody.appendChild(cardTitle);
+            cardBody.appendChild(cardText);
+            cardBody.appendChild(cardMore);
+            card.appendChild(cardBody);
+            recipeResult.appendChild(card);
 
         });
     
     };
     
+        // Code for Modal
+        function openModal(recipe) {
+            const modalTitle = document.querySelector('.modal-title');
+            const modalBody = document.querySelector('.modal-body');
+
+            // Clear previous modal content
+            modalTitle.textContent = '';
+            modalBody.innerHTML = '';
+
+            const recipeImage = document.createElement('img');
+            recipeImage.src = recipe.image;
+            recipeImage.width="450";
+            recipeImage.height="300";
+            recipeImage.style.display = 'block';
+            recipeImage.style.margin = '0 auto';
+
+            const modalDescHeading = document.createElement('h5');
+            modalDescHeading.textContent = 'Description';
+
+            const modalDesc = document.createElement('p');
+            modalDesc.textContent = recipe.description;
+            
+            const modalIngrHeading = document.createElement('h5');
+            modalIngrHeading.textContent = 'Ingredients:';
+
+            const recipeList = document.createElement('ul');
+            recipe.ingredients.forEach(ingredient => {
+                const listItem = document.createElement('li');
+                listItem.textContent = ingredient;
+                recipeList.appendChild(listItem);
+            });
+
+            const modalStepHeading = document.createElement('h5');
+            modalStepHeading.textContent = 'Steps:';
+
+            const modalSteps = document.createElement('p');
+            modalSteps.type = "1";
+            let stepNumber = 1;
+
+            recipe.steps.forEach(ingredient => {
+                const listItem2 = document.createElement('p');
+                listItem2.textContent = stepNumber + '. ' + ingredient;
+                modalSteps.appendChild(listItem2);
+                stepNumber++;
+            });
+
+
+            // Set modal title and body content based on the recipe
+            modalTitle.textContent = recipe.title;
+            
+            modalBody.appendChild(recipeImage);
+            modalBody.appendChild(document.createElement('br'));
+            modalBody.appendChild(modalDescHeading);
+            modalBody.appendChild(modalDesc);
+            modalBody.appendChild(document.createElement('br'));
+            modalBody.appendChild(modalIngrHeading);
+            modalBody.appendChild(recipeList);
+            modalBody.appendChild(document.createElement('br'));
+            modalBody.appendChild(modalStepHeading);
+            modalBody.appendChild(modalSteps);
+
+            // Show the modal
+            const modal = document.getElementById('myModal');
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+
+            // Get the "Close" button element
+            const closeButton = document.querySelector('.modal-header button[data-dismiss="modal"]');
+
+            // Add event listener to the close button
+            closeButton.addEventListener('click', function() {
+                modalInstance.hide();
+            });
+        };
     
     </script>
     
