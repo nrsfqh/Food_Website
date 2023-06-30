@@ -26,87 +26,87 @@
 
   <div id="page-body" class="container-xxl shadow-lg">
 
-    <div class = "sidebar">
-
-        <div class = "sidebar_menu">
-
-            <h2> Filter: </h2>
-        
-            <div class="ingredient_list">
-                <br>
-                <h5 class = "h5-style"> Ingredients:</h5>
-
-                <div class="checkbox">
-                    <label><input type="checkbox" value="Rice" onchange="change();"/> Rice</label>
-                </div>
-                
-                <div class="checkbox">
-                    <label><input type="checkbox" value="Coconut Milk" onchange="change();"/> Coconut Milk</label>
-                </div>
-
-                <div class="checkbox">
-                    <label><input type="checkbox" value="Chicken" onchange="change();"/> Chicken</label>
-                </div>
-        
-            </div>
-
-            <hr class="line">
-
-            <div class="cuisine_filter">
-                
-                <h5 class = "h5-style"> Cuisines:</h5>
-
-                <div class="cuisine-list">
-
-                    <div class="checkbox2">
-                        <label><input type="checkbox" value="Malaysian" onchange="change();"/> Malaysian</label>
-                    </div>
-
-                    
-                    <div class="checkbox2">
-                        <label><input type="checkbox" value="Western" onchange="change();"/> Western</label>
-                    </div>
-                  
-                    <div class="checkbox2">
-                        <label><input type="checkbox" value="Indian" onchange="change();"/> Indian</label>
-                    </div>
-        
-                   
-                </div>
-
-            </div>
-
-
-            <hr class="line">
-            <br>
-
-            <button class="btn btn-showall" onclick="showAllRecipe()">Show All Recipes!</button>
-
-
-        </div>
-
-       
-    </div>
-
     <div class="body_container">
 
-        <div class="text_container">
-                
-            <h2>Results</h2>
+      <div class = "sidebar">
 
-        </div>
+              <div class = "sidebar_menu">
+
+                  <h2> Filter: </h2>
+              
+                  <div class="ingredient_list">
+                      <br>
+                      <h5 class = "h5-style"> Ingredients:</h5>
+
+                      <div class="checkbox">
+                          <label><input type="checkbox" value="Rice" onchange="change();"/> Rice</label>
+                      </div>
+                      
+                      <div class="checkbox">
+                          <label><input type="checkbox" value="Coconut Milk" onchange="change();"/> Coconut Milk</label>
+                      </div>
+
+                      <div class="checkbox">
+                          <label><input type="checkbox" value="Chicken" onchange="change();"/> Chicken</label>
+                      </div>
+              
+                  </div>
+
+                  <hr class="line">
+
+                  <div class="cuisine_filter">
+                      
+                      <h5 class = "h5-style"> Cuisines:</h5>
+
+                      <div class="cuisine-list">
+
+                          <div class="checkbox2">
+                              <label><input type="checkbox" value="Malaysian" onchange="change();"/> Malaysian</label>
+                          </div>
+
+                          
+                          <div class="checkbox2">
+                              <label><input type="checkbox" value="Western" onchange="change();"/> Western</label>
+                          </div>
+                        
+                          <div class="checkbox2">
+                              <label><input type="checkbox" value="Indian" onchange="change();"/> Indian</label>
+                          </div>
+              
+                        
+                      </div>
+
+                  </div>
+
+
+                  <hr class="line">
+                  <br>
+
+                  <button class="btn btn-showall" onclick="showAllRecipe()">Show All Recipes!</button>
+
+
+              </div>
+
             
-            <div class="card-container" id="recipeResult">
+      </div>
+
+      <div class="text_container">
+                
+        <h2>Results</h2>
+
+      </div>
+            
+      <div class="card-container" id="recipeResult">
             <!-- Recipe titles will be dynamically generated here -->   
 
             
 
-            </div>
+      </div>
 
     </div> 
     
     <!-- Site footer -->
-    <footer class="site-footer">
+    <footer class="site-footer"> 
         <div class="container">
           <div class="row">
             <div class="col-sm-12 col-md-6">
@@ -135,7 +135,7 @@
   
     
         </div>
-    </footer>
+    </footer> 
 
   </div>
 
@@ -163,27 +163,6 @@
 </body>
 
 <script>
-
-// Declare elements
-const container = document.querySelector('.container-xxl');
-const footer = document.querySelector('.site-footer');
-const additional = 60; 
-
-// Code to adjust the footer position based on the height of the xxl container
-function adjustFooterPosition() {
-
-  //This is to reset the margin Top whenever this function is used.
-  footer.style.marginTop = '';
-  
-  const containerHeight = container.offsetHeight;
-  const footerHeight = containerHeight - additional;
-  
-  console.log("Container Height: " + containerHeight);
-  console.log("Footer: " + footerHeight + "px");
-
-  footer.style.marginTop = footerHeight + 'px';
-}
-
 
 
 //The main functions
@@ -314,7 +293,7 @@ function displayFilteredRecipes(recipes) {
             recipeResult.appendChild(card);
     });
   }
-  adjustFooterPosition();
+  
 }
 
 function showAllRecipe(ingredients){
@@ -388,8 +367,6 @@ recipes.forEach(recipe => {
     card.appendChild(cardBody);
     recipeResult.appendChild(card);
 });
-
-adjustFooterPosition();
 
 };
 
