@@ -16,16 +16,15 @@
 
 <body>
 
-    <div class="banner">
+  <div class="banner">
         <div class="background-image"></div> 
         <div class = "banner-text"> 
         <h1 class="banner-h1">Welcome to the site!</h1>
         <h5 class = "banner-h5" >Don't know what to eat today? You come to the right place!</h5>
+        </div>  
+  </div>
 
-    </div>  
-
- <div id="page-body" class="container-xxl shadow-lg">
-
+  <div id="page-body" class="container-xxl shadow-lg">
 
     <div class = "sidebar">
 
@@ -104,10 +103,43 @@
 
             </div>
 
-        </div>       
-    </div>
+    </div> 
+    
+    <!-- Site footer -->
+    <footer class="site-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <h6>About</h6>
+              <p class="text-justify"> Hi! This is a simple HTML Project I created. This is the local version. Please check out my GitHub Page on <a href="https://github.com/nrsfqh/Food_Website">this project</a> for more infomation :)</p>
+            </div>
+  
 
-     <!-- The Modal -->
+  
+            <div class="col-xs-6 col-md-3">
+              <h6>Quick Links</h6>
+              <ul class="footer-links">
+                <li><a href="https://github.com/nrsfqh">GitHub Profile</a></li>
+                <li><a href="https://github.com/nrsfqh/Food_Website">Project Page</a></li>
+              </ul>
+            </div>
+          </div>
+          <hr>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+              <p class="copyright-text">Copyright &copy; 2023 
+              </p>
+            </div>
+  
+    
+        </div>
+    </footer>
+
+  </div>
+
+  <!-- The Modal -->
   <div class="modal" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -125,11 +157,34 @@
    </div> 
        
    
-</div>
+    </div>
+  </div>
     
 </body>
 
 <script>
+
+// Declare elements
+const container = document.querySelector('.container-xxl');
+const footer = document.querySelector('.site-footer');
+const additional = 60; 
+
+// Code to adjust the footer position based on the height of the xxl container
+function adjustFooterPosition() {
+
+  //This is to reset the margin Top whenever this function is used.
+  footer.style.marginTop = '';
+  
+  const containerHeight = container.offsetHeight;
+  const footerHeight = containerHeight - additional;
+  
+  console.log("Container Height: " + containerHeight);
+  console.log("Footer: " + footerHeight + "px");
+
+  footer.style.marginTop = footerHeight + 'px';
+}
+
+
 
 //The main functions
 function change() {
@@ -153,10 +208,6 @@ function change() {
       ingredients: selectedIngredients.join(',')
     };
   }
-// var data = {
-//       cuisine: selectedCuisine.join(','),
-//       ingredients: selectedIngredients.join(',')
-//     };
 
   // Make an AJAX request to the server-side route for filtering
 
@@ -263,6 +314,7 @@ function displayFilteredRecipes(recipes) {
             recipeResult.appendChild(card);
     });
   }
+  adjustFooterPosition();
 }
 
 function showAllRecipe(ingredients){
@@ -335,8 +387,9 @@ recipes.forEach(recipe => {
     cardBody.appendChild(cardMore);
     card.appendChild(cardBody);
     recipeResult.appendChild(card);
-
 });
+
+adjustFooterPosition();
 
 };
 
