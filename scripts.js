@@ -1,11 +1,5 @@
     let selectedCuisine = null;
 
-    // let checkbox2 = 
-
-    // checkbox2.addEventListener('click', () => {
-    //     selectedCuisine = null;
-    // });
-
     // Function to filter recipes based on ingredient filters
     function filterRecipes(ingredients, cuisine) {
         //check if ingredient and cuisine array is 0
@@ -111,6 +105,7 @@
                 cardBody.appendChild(cardMore);
                 card.appendChild(cardBody);
                 recipeResult.appendChild(card);
+               
 
             });
         }
@@ -181,8 +176,8 @@
     
     };
     
-        // Code for Modal
-        function openModal(recipe) {
+    // Code for Modal
+    function openModal(recipe) {
             const modalTitle = document.querySelector('.modal-title');
             const modalBody = document.querySelector('.modal-body');
 
@@ -254,4 +249,5 @@
             closeButton.addEventListener('click', function() {
                 modalInstance.hide();
             });
-        };
+    };
+        
