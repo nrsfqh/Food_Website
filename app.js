@@ -2,6 +2,7 @@ const express = require('express');
 const { ObjectId } = require('mongodb');
 const { connectToDb, getDb } = require('./db');
 const path = require('path');
+const serverless = require('serverless-http');
 
 //initialise app
 const app = express()
@@ -150,6 +151,4 @@ app.get('/img/:imageUrl', (req, res) => {
   res.sendFile(imagePath);
 });
 
-
-
-
+module.exports.handler = app;

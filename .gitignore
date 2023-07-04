@@ -1,3 +1,5 @@
 .env
 github_coding
 github_coding.pub
+node_modules
+node_quickstart
