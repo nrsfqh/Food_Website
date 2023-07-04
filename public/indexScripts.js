@@ -216,7 +216,7 @@ function openModal(recipe) {
     modalBody.innerHTML = '';
 
     const recipeImage = document.createElement('img');
-    recipeImage.src = recipe.image;
+    recipeImage.src = `img/${recipe.image}`;
     recipeImage.width = "450";
     recipeImage.height = "300";
     recipeImage.style.display = 'block';
