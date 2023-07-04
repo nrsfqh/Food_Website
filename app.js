@@ -1,7 +1,7 @@
 const express = require('express');
 const { ObjectId } = require('mongodb');
 const { connectToDb, getDb } = require('./db');
-
+const path = require('path');
 
 //initialise app
 const app = express()
@@ -139,14 +139,17 @@ app.get('/recipes/filter/:ingredients/:cuisines', (req, res) => {
     });
 });
 
-//Get Recipe images
-app.get('/img/:imageUrl', (req, res) => {
-  // Read the image file from project directory using the imageUrl
-  const imageUrl = req.params.imageUrl;
 
-  // Send it as the response
-  res.sendFile(__dirname + '/img/' + imageUrl);
+// Get Recipe images
+app.get('/img/:imageUrl', (req, res) => {
+  // Read the image file from the 'img' folder using the imageUrl
+  const imageUrl = req.params.imageUrl;
+  const imagePath = path.join(__dirname, 'img', imageUrl);
+
+  // Send the image file as the response
+  res.sendFile(imagePath);
 });
+
 
 
 

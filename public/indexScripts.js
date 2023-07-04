@@ -96,7 +96,7 @@ function displayFilteredRecipes(recipes) {
             card.className = 'card';
 
             const cardImage = document.createElement('img');
-            cardImage.src = recipe.image;
+            cardImage.src = `img/${recipe.image}`;
             cardImage.className = "card-img-top";
 
             const cardBody = document.createElement('div');
@@ -172,7 +172,7 @@ function showAllRecipe(recipes) {
             card.className = 'card';
 
             const cardImage = document.createElement('img');
-            cardImage.src = recipe.image;
+            cardImage.src = `img/${recipe.image}`;
             cardImage.className = "card-img-top";
 
             const cardBody = document.createElement('div');
