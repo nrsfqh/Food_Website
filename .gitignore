@@ -1,3 +1,5 @@
 /index_complex.html
 /index_simple.html
 .env
+node_modules
+node_quickstart
