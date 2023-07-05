@@ -1,4 +1,4 @@
-#  Recipe Filtering Website (MongoDB Version)
+##  Recipe Filtering Website (MongoDB Version)
 
 - This is just a short little coding project I did which was inspired by me not knowing what to eat
 
@@ -13,5 +13,38 @@
   - Express.js
   - MongoDB
 
-- There's only 13 Recipes because I wanted to do some experimenting first with the layout and codes
+- There are only 13 Recipes because I wanted to do some experimenting first with the layout and codes
+
+
+## Screenshots of the Website :)
+- The website is similar to the <a href="https://github.com/nrsfqh/Food_Website"> local version!
+- The only difference would be that this version uses MongoDB instead of an array so it has slightly more recipes :)
+
+
+![Main Page](https://i.imgur.com/OJBgssl.png)
+
+<hr>
+
+![Bottom half](https://i.imgur.com/qzObVxo.png)
+
+<hr>
+
+![Filter one](https://i.imgur.com/P25wsRz.png)
+
+<hr>
+
+![Filter Two](https://i.imgur.com/MumnFua.png)
+
+<hr>
+
+![Click Show all](https://i.imgur.com/jo6NGzI.png)
+
+<hr>
+
+![Scroll](https://i.imgur.com/zOrjXqb.png)
+
+<hr>
+
+![Modal](https://i.imgur.com/ylYDAPD.png)
+
 
