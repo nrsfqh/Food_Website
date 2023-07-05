@@ -23,7 +23,7 @@ const recipes = [
      "Prepare the condiments, such as soy sauce, chili sauce, and cucumber slices.", "Slice the cooked chicken and serve it on a plate with the fragrant chicken rice and condiments."]},
   { id: 5, title: 'Biryani', ingredients:  ['Mutton', 'Chicken', 'Beef', 'Eggs', 'Nuts', 'Dried fruits', 'Vegetables', 'Potatoes', 'Rice'] , 
   cuisine: 'Indian', description: 'Biryani is a mixed rice dish originating among the Muslims of South Asia.',
-  image: './img/biryani.jpg', steps:["Rinse and soak the rice to remove excess starch", "Cook the rice with whole spices, such as cinnamon, cardamom, and cloves, to infuse it with aromatic flavors",
+  image: './img/Biryani.jpg', steps:["Rinse and soak the rice to remove excess starch", "Cook the rice with whole spices, such as cinnamon, cardamom, and cloves, to infuse it with aromatic flavors",
   "In a separate pan, sauté onions until golden brown and set them aside for garnishing", "Prepare the meat (chicken, lamb, or beef) by marinating it with a mixture of yogurt and spices, such as turmeric, cumin, and coriander",
   "Cook the meat until tender and flavorful", "Layer the cooked rice and meat in a deep pot, alternating between rice and meat layers",
   "Drizzle saffron-infused milk and ghee over the layered rice and meat for added richness", "Cover the pot with a tight-fitting lid and cook on low heat, allowing the flavors to meld together and the rice to steam",
